@@ -7,7 +7,9 @@ add_executable(${PROJECT_NAME} src/main.cpp
         src/Core/Game.cpp src/Render/Sprite.cpp
         src/Render/SpritePosition.cpp
         src/Render/EnvyRenderer.cpp
-        src/Core/Events/EnvyEventSystem.cpp)
+        src/Core/Events/EnvyEventManager.cpp
+        src/Core/Events/EnvyEventListener.cpp
+        src/Render/DirectionHelper.cpp)
 
 # --- SDL2 SETUP ---
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)

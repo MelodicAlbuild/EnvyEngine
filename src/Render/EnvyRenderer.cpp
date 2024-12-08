@@ -4,6 +4,8 @@
 
 #include "EnvyRenderer.h"
 
+#include <SDL_log.h>
+
 EnvyRenderer::EnvyRenderer() {
     _r = 0;
     _b = 0;
@@ -13,7 +15,6 @@ EnvyRenderer::EnvyRenderer() {
 
 void EnvyRenderer::initRenderer(SDL_Renderer *renderer) {
     _renderer = renderer;
-    _window = SDL_RenderGetWindow(renderer);
 }
 
 
@@ -21,11 +22,11 @@ void EnvyRenderer::drawGrid(int tileSize, int displayHeight, int displayWidth) {
 
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 
-    for (int y = 0; y < displayHeight; y += 32) {
+    for (int y = 0; y < displayHeight; y += tileSize) {
         SDL_RenderDrawLine(_renderer, 0, y, displayWidth, y);
     }
 
-    for (int x = 0; x < displayWidth; x += 32) {
+    for (int x = 0; x < displayWidth; x += tileSize) {
         SDL_RenderDrawLine(_renderer, x, 0, x, displayHeight);
     }
 

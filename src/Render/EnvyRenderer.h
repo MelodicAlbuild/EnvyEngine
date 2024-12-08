@@ -19,7 +19,6 @@ class EnvyRenderer {
     void fillRect(SDL_Rect *rect, int r, int g, int b);
 
   private:
-    SDL_Window* _window;
     SDL_Renderer* _renderer{};
     int _r, _g, _b, _a;
 };

@@ -3,11 +3,19 @@
 
 #include "EnvyRenderer.h"
 #include "SpritePosition.h"
+#include "../Core/Events/EnvyEventListener.h"
 
-class Sprite {
-  public:
-    Sprite();
-    SpritePosition position;
+class Sprite : public EnvyEventListener
+{
+public:
+  Sprite();
+  SpritePosition position;
+
+  void onDraw(EnvyRenderer *renderer);
+  void onMoveUpdate(DirectionHelper::Direction dir);
+
+private:
+  float speed = 0.05f;
 };
 
-#endif //SPRITE_H
+#endif // SPRITE_H
