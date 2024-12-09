@@ -3,19 +3,19 @@
 
 #include "EnvyRenderer.h"
 #include "SpritePosition.h"
-#include "../Core/Events/EnvyEventListener.h"
+#include "../Objects/Object.h"
 
-class Sprite : public EnvyEventListener
+#define SPEED 0.05f
+
+class Sprite : public Object
 {
 public:
   Sprite();
+
   SpritePosition position;
 
   void onDraw(EnvyRenderer *renderer);
   void onMoveUpdate(DirectionHelper::Direction dir);
-
-private:
-  float speed = 0.05f;
 };
 
 #endif // SPRITE_H

@@ -7,13 +7,13 @@ class EnvyEventListener
 {
 public:
     template <typename EventType, typename... Args>
-    void subscribe(const std::function<void(Args...)> &handler)
+    void subscribe(const std::function<void(Args&...)> &handler)
     {
         EnvyEventManager::getInstance().getEvent<EventType>().subscribe(handler);
     }
 
     template <typename EventType, typename... Args>
-    void unsubscribe(const std::function<void(Args...)> &handler)
+    void unsubscribe(const std::function<void(Args&...)> &handler)
     {
         EnvyEventManager::getInstance().getEvent<EventType>().unsubscribe(handler);
     }

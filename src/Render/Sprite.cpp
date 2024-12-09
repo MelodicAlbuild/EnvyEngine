@@ -1,5 +1,5 @@
 //
-// Created by ralex on 12/4/2024.
+// Created by MelodicAlbuild on 12/4/2024.
 //
 
 #include "Sprite.h"
@@ -10,13 +10,13 @@
 
 Sprite::Sprite() : position(0, 0)
 {
-    SDL_Log("X: %d, Y: %d", this->position.getX(), this->position.getY());
-
-    std::function<void(DirectionHelper::Direction)> moveHandler = [this]<typename T0>(T0 && PH1) { onMoveUpdate(std::forward<T0>(PH1)); };
+    std::function moveHandler = [this](DirectionHelper::Direction &dir)
+    { onMoveUpdate(dir); };
     this->subscribe<SpriteMoveEvent<DirectionHelper::Direction>>(moveHandler);
 
-    std::function<void(EnvyRenderer *)> drawHandler = [this]<typename T0>(T0 && PH1) { onDraw(std::forward<T0>(PH1)); };
-    this->subscribe<DrawEvent<EnvyRenderer *>>(drawHandler);
+    std::function drawHandler = [this](EnvyRenderer &renderer)
+    { onDraw(&renderer); };
+    this->subscribe<DrawEvent<EnvyRenderer>>(drawHandler);
 }
 
 void Sprite::onDraw(EnvyRenderer *renderer)
@@ -32,17 +32,12 @@ void Sprite::onDraw(EnvyRenderer *renderer)
 
 void Sprite::onMoveUpdate(DirectionHelper::Direction dir)
 {
-    SDL_Log("Sprite::onMoveUpdate");
-    SDL_Log("X: %d, Y: %d", this->position.getX(), this->position.getY());
-
-    if (dir == DirectionHelper::Direction::None && this->position.isMoveComplete()) return;
-
     if (dir != DirectionHelper::Direction::None && this->position.isMoveComplete())
     {
-        this->position.update(dir, speed);
+        this->position.update(dir, SPEED);
     }
     else
     {
-        this->position.update(speed);
+        this->position.update(SPEED);
     }
 }

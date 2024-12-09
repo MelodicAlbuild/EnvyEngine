@@ -41,18 +41,19 @@ void Game::start()
     run();
 }
 
-void Game::createSprites() {
-    Sprite block{};
+void Game::createSprites()
+{
+    static Sprite block{};
     block.position.setPosition(0, 0);
-    sprites.push_back(block);
+    sprites.emplace_back(block);
 }
 
 void Game::draw()
 {
     SDL_RenderClear(renderer);
 
-    auto& eventManager = EnvyEventManager::getInstance();
-    eventManager.getEvent<DrawEvent<EnvyRenderer*>>().notify(&envyRenderer);
+    auto &eventManager = EnvyEventManager::getInstance();
+    eventManager.getEvent<DrawEvent<EnvyRenderer>>().notify(envyRenderer);
 
     envyRenderer.drawGrid(32, DISPLAY_HEIGHT, DISPLAY_WIDTH);
 
@@ -181,17 +182,17 @@ void Game::update()
         moveDown = false;
     }
 
-    auto& eventManager = EnvyEventManager::getInstance();
-
-    SDL_Log("%d, %d, %d, %d", moveLeft, moveRight, moveUp, moveDown);
+    auto &eventManager = EnvyEventManager::getInstance();
 
     if (moveLeft || moveRight || moveUp || moveDown)
     {
-        eventManager.getEvent<SpriteMoveEvent<DirectionHelper::Direction>>().notify(DirectionHelper::computeFromBooleans(moveLeft, moveRight, moveUp, moveDown));
+        auto direction = DirectionHelper::computeFromBooleans(moveLeft, moveRight, moveUp, moveDown);
+        eventManager.getEvent<SpriteMoveEvent<DirectionHelper::Direction>>().notify(direction);
     }
     else
     {
-        eventManager.getEvent<SpriteMoveEvent<DirectionHelper::Direction>>().notify(DirectionHelper::Direction::None);
+        auto noneDirection = DirectionHelper::Direction::None;
+        eventManager.getEvent<SpriteMoveEvent<DirectionHelper::Direction>>().notify(noneDirection);
     }
 }
 

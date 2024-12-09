@@ -9,7 +9,8 @@ add_executable(${PROJECT_NAME} src/main.cpp
         src/Render/EnvyRenderer.cpp
         src/Core/Events/EnvyEventManager.cpp
         src/Core/Events/EnvyEventListener.cpp
-        src/Render/DirectionHelper.cpp)
+        src/Render/DirectionHelper.cpp
+        src/Objects/Object.cpp)
 
 # --- SDL2 SETUP ---
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
