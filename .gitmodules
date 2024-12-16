@@ -1,0 +1,3 @@
+[submodule "vendor/tmxloader"]
+	path = vendor/tmxloader
+	url = https://github.com/martygrant/tmxloader.git

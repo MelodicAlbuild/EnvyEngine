@@ -4,7 +4,7 @@ cmake-build-debug/*
 cmake-build-*/*
 # cmake/
 .idea/
-vendor/
+vendor/SDL2
 resources/
 build/
 
